@@ -3,21 +3,29 @@ LINK = "littlePeopleDeck.csv"
 UNIT = INCH
 PAGE = 8.5, 11, PORTRAIT
 
-BORDER = ROUNDED, #228B22, 0.3; #228B22 = forest green
+;; Colors
+;[green] = #228B22;
+;[blue] = #002366;
+;[gold] = #FFD700;
+
+;; Border
+;Rectangle
+;Future: Use conditional to set border color based on card type. See page 23
+RECTANGLE=LABELRANGE([Type],Move),0%,0%,100%,100%,#228B22,EMPTY,0.2
+RECTANGLE=LABELRANGE([Type],Attack),0%,0%,100%,100%,#FFD700,EMPTY,0.2
+RECTANGLE=LABELRANGE([Type],Defend),0%,0%,100%,100%,#002366,EMPTY,0.2
 
 VISUAL=HV, 30, 24
 FONT=Book Antiqua,16,,#000000
-;NAME
+;; Card name
 ;(NAME)
 ;returns number of elements in NAME -> First input is range = 1-n(locked)
-TEXT="1-{(NAME)}",[NAME],0%,2.18%,100%,8.43%,CENTER
+TEXT="1-{(NAME)}",[NAME],5%,2.5%,90%,8.5%,CENTER
 ;IMAGE(locked)
 ;Future: Possibly use DIRFILES to load an image where the file names matches card name
 IMAGE="1-{(IMAGE)}",[IMAGE],27.015%,10.029%,46.841%,31.395%
 EDGE=,SOLID
-;Rectangle(locked)
-;Future: Use conditional to set border color based on card type. See page 23
-RECTANGLE=,0%,0%,100%,100%,#002366,EMPTY,0.2
+
 FONT=Book Antiqua,10,,#000000
 ;[s]Future: Use sequence  ="M+|A+|D+" plus frame to define scores
 ;M1 (locked)
@@ -50,36 +58,10 @@ ENDVISUAL
 ; Simple spell pattern
 ;Future: Might be possible to auto-generate patterns. See 'Labels and sequences'
 [frame]=FRAMEBOX(.40,1.6,0.45,0.45,0.09,0.09,C.,85)
-
-[test] = stringsub([pattern_1],1)
-
-;Works!
 [pattern_1_str] = SCHEMA([pattern_1],1,,,PRODUCT(frame,((1))))
 RECTANGLE=labelrange([pattern_1_str],@µ),<frame*>,#000000,#FFFFFF,0.1%
 
-;; almost works
-;[pattern_1_str] = PRODUCT(frame,[pattern_1])
-;RECTANGLE=labelrange([pattern_1_str],@µ),<frame*>,#000000,#FFFFFF,0.1%
-
- ; doesn't work
-;[pattern_1_str] = PRODUCT(frame,labelrange([pattern_1],@µ))
-;RECTANGLE=labelrange([pattern_1_str],@µ),<frame*>,#000000,#FFFFFF,0.1%
-;[pattern_1_str] = CONCAT(PRODUCT(frame,[pattern_1])) ;
-;[pattern_debug2]=frame0101; frameA2 frameA3|frameB1 frameB2 frameB3
-;rectangle=labelrange([pattern_debug2],@µ),<frame*>,#000000,#FFFFFF,0.1%
-
-;;Works, from Nand:
-;[frame]=FRAMEBOX(.40,1.6,0.45,0.45,0.09,0.09,C.,85)
-;[pattern_debug2]=frame2.1 frame3.2 frame4.3|frame3.1 frame4.2 frame5.3
-;rectangle=labelrange([pattern_debug2],@µ),<frame*>,#000000,#FFFFFF,0.1%
-
-;Works, manually:
-;RECTANGLE=,<frame[PATTERN_1]>,#000000,EMPTY,0.00
-;RECTANGLE=1,<frame2.1>,#000000,EMPTY,0.00
-;RECTANGLE=1,<frame3.2>,#000000,EMPTY,0.00
-;RECTANGLE=1,<frame4.3>,#000000,EMPTY,0.00
-
-
 ;Complex spell pattern
 [frame]=FRAMEBOX(0.40,2.51,0.45,0.45,0.09,0.09,C.,85)
-RECTANGLE=,<frame*>,#000000,EMPTY,0.00
+[pattern_2_str] = SCHEMA([pattern_2],1,,,PRODUCT(frame,((1))))
+RECTANGLE=labelrange([pattern_2_str],@µ),<frame*>,#000000,#FFFFFF,0.1%
