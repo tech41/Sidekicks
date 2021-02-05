@@ -4,9 +4,10 @@ UNIT = INCH
 PAGE = 8.5, 11, PORTRAIT
 
 ;; Colors
-;[green] = #228B22;
-;[blue] = #002366;
-;[gold] = #FFD700;
+; #228B22; green
+; #002366; blue
+; #FFD700; yellow
+
 
 ;; Border
 ;Rectangle
@@ -55,13 +56,24 @@ LINE=,6.536%,70.349%,93.9%,70.349%,#000000,0.005
 ;ABILITY_2
 TEXT="1-{(ABILITY_2)}",[ABILITY_2],5.229%,84.448%,89.542%,12.064%,CENTER,WORDWRAP
 ENDVISUAL
+
 ; Simple spell pattern
 ;Future: Might be possible to auto-generate patterns. See 'Labels and sequences'
 [frame]=FRAMEBOX(.40,1.6,0.45,0.45,0.09,0.09,C.,85)
 [pattern_1_str] = SCHEMA([pattern_1],1,,,PRODUCT(frame,((1))))
-RECTANGLE=labelrange([pattern_1_str],@µ),<frame*>,#000000,#FFFFFF,0.1%
+;WIP, color doesn't work yet
+[g] = #228B22
+[b] = #002366
+[y] = #FFD700
+[color_1_split] = STRINGLABEL(SCHEMA([color_1],1,,,((1))))
+[color_1_label] = [color_1_split];
+[color_1_label] = REPLACE([color_1_label], b, #002366)
+[color_1_label] = REPLACE([color_1_label], y, #FFD700)
+[color_1_label] = REPLACE([color_1_label], g, #228B22)
+RECTANGLE=labelrange([pattern_1_str],@µ),<frame*>,#000000,[color_1_label],0.1%
 
 ;Complex spell pattern
 [frame]=FRAMEBOX(0.40,2.51,0.45,0.45,0.09,0.09,C.,85)
 [pattern_2_str] = SCHEMA([pattern_2],1,,,PRODUCT(frame,((1))))
+
 RECTANGLE=labelrange([pattern_2_str],@µ),<frame*>,#000000,#FFFFFF,0.1%
