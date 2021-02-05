@@ -2,13 +2,13 @@
 import tkinter as tk
 
 class Square(tk.Button):
-    def __init__(self, master):
+    def __init__(self, master, myRow, myCol):
         self.counter = 0
         self.colorList = ["white", "blue", "green", "yellow"]
         initColorIdx = 0
         tk.Button.__init__(self, master, bg=self.colorList[initColorIdx], command=self.update_color) # could also use super().__init__()
-        #tk.Button.__init__(self, master, bg=initColor) # could also use super().__init__()
         self.config(height = 2, width = 5)
+        self.grid(row = myRow, column = myCol)
 
     def update_color(self):
         counter = self.counter;
@@ -19,8 +19,11 @@ class Square(tk.Button):
         self.counter = counter
 
 class PatternFrame(tk.Frame):
-    def __init__(self, master):
+    def __init__(self, master, mySide):
         tk.Frame.__init__(self, master)
+        self.grid(row = 2, column = 1)
+        self.config(height = 400, width = 400)
+        self.config(bd = 1, relief = "raised")
         
 
 class PatternBuilderTool:
@@ -30,11 +33,13 @@ class PatternBuilderTool:
         master.geometry('1000x500')
 
         self.label = tk.Label(master, text="Simple pattern")
-        self.label.pack()
+        self.label.grid(row = 1, column = 1)
         
-        #self.square = tk.Button(master, height = 2, width = 5)
-        self.square = Square(master)
-        self.square.pack()
+        self.frameSimple = PatternFrame(master, "left")
+        
+        self.square = Square(self.frameSimple, 1, 1)
+        self.square = Square(self.frameSimple, 1, 2)
+
 
         
 root = tk.Tk()
