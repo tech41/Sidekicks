@@ -19,11 +19,19 @@ class Square(tk.Button):
         self.counter = counter
 
 class PatternFrame(tk.Frame):
-    def __init__(self, master, mySide):
+    def __init__(self, master, myRow, myCol):
         tk.Frame.__init__(self, master)
-        self.grid(row = 2, column = 1)
+        self.grid(row = myRow, column = myCol)
         self.config(height = 400, width = 400)
         self.config(bd = 1, relief = "raised")
+        self.addSquares()
+        
+    def addSquares(self):
+        numSide = 5
+        for i in range(numSide):
+            for j in range(numSide):
+                self.square = Square(self, i, j)
+     
         
 
 class PatternBuilderTool:
@@ -35,12 +43,10 @@ class PatternBuilderTool:
         self.label = tk.Label(master, text="Simple pattern")
         self.label.grid(row = 1, column = 1)
         
-        self.frameSimple = PatternFrame(master, "left")
-        
-        self.square = Square(self.frameSimple, 1, 1)
-        self.square = Square(self.frameSimple, 1, 2)
-
-
+        self.frameSimple = PatternFrame(master, 2, 1)
+        self.frameSpacer = tk.Frame(master, height = 400, width = 100)
+        self.frameSpacer.grid(row = 2, column = 2)
+        self.frameComplex = PatternFrame(master, 2, 3)
         
 root = tk.Tk()
 patternBuilder = PatternBuilderTool(root)
