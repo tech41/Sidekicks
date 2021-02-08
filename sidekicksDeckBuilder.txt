@@ -1,5 +1,5 @@
 LINKMULTI = Count; defines how many of each type of card should be included
-LINK = "littlePeopleDeck.csv"
+LINK = "sidekicksDeck.csv"
 UNIT = INCH
 PAGE = 8.5, 11, PORTRAIT
 
@@ -9,9 +9,7 @@ PAGE = 8.5, 11, PORTRAIT
 ; #FFD700; yellow
 
 
-;; Border
-;Rectangle
-;Future: Use conditional to set border color based on card type. See page 23
+;; Border/Rectangle: set color based on card type
 RECTANGLE=LABELRANGE([Type],Move),0%,0%,100%,100%,#228B22,EMPTY,0.2
 RECTANGLE=LABELRANGE([Type],Attack),0%,0%,100%,100%,#FFD700,EMPTY,0.2
 RECTANGLE=LABELRANGE([Type],Defend),0%,0%,100%,100%,#002366,EMPTY,0.2
@@ -60,20 +58,18 @@ ENDVISUAL
 ; Simple spell pattern
 ;Future: Might be possible to auto-generate patterns. See 'Labels and sequences'
 [frame]=FRAMEBOX(.40,1.6,0.45,0.45,0.09,0.09,C.,85)
-[pattern_1_str] = SCHEMA([pattern_1],1,,,PRODUCT(frame,((1))))
-;WIP, color doesn't work yet
-[g] = #228B22
-[b] = #002366
-[y] = #FFD700
-[color_1_split] = STRINGLABEL(SCHEMA([color_1],1,,,((1))))
-[color_1_label] = [color_1_split];
-[color_1_label] = REPLACE([color_1_label], b, #002366)
-[color_1_label] = REPLACE([color_1_label], y, #FFD700)
-[color_1_label] = REPLACE([color_1_label], g, #228B22)
-RECTANGLE=labelrange([pattern_1_str],@µ),<frame*>,#000000,[color_1_label],0.1%
+[pattern_1_str_g] = SCHEMA([pattern_1_g],1,,,PRODUCT(frame,((1))))
+[pattern_1_str_b] = SCHEMA([pattern_1_b],1,,,PRODUCT(frame,((1))))
+[pattern_1_str_y] = SCHEMA([pattern_1_y],1,,,PRODUCT(frame,((1))))
+RECTANGLE=labelrange([pattern_1_str_g],@µ),<frame*>,#000000,#228B22,0.1%
+RECTANGLE=labelrange([pattern_1_str_b],@µ),<frame*>,#000000,#002366,0.1%
+RECTANGLE=labelrange([pattern_1_str_y],@µ),<frame*>,#000000,#FFD700,0.1%
 
 ;Complex spell pattern
 [frame]=FRAMEBOX(0.40,2.51,0.45,0.45,0.09,0.09,C.,85)
-[pattern_2_str] = SCHEMA([pattern_2],1,,,PRODUCT(frame,((1))))
-
-RECTANGLE=labelrange([pattern_2_str],@µ),<frame*>,#000000,#FFFFFF,0.1%
+[pattern_2_str_g] = SCHEMA([pattern_2_g],1,,,PRODUCT(frame,((1))))
+[pattern_2_str_b] = SCHEMA([pattern_2_b],1,,,PRODUCT(frame,((1))))
+[pattern_2_str_y] = SCHEMA([pattern_2_y],1,,,PRODUCT(frame,((1))))
+RECTANGLE=labelrange([pattern_2_str_g],@µ),<frame*>,#000000,#228B22,0.1%
+RECTANGLE=labelrange([pattern_2_str_b],@µ),<frame*>,#000000,#002366,0.1%
+RECTANGLE=labelrange([pattern_2_str_b],@µ),<frame*>,#000000,#002366,0.1%

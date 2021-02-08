@@ -1,5 +1,6 @@
 # pattern_builder: Tool for creating spell patterns and reading/writing to the Sidekicks CSV
 import tkinter as tk
+import pandas                 # read/write CSV
 
 class Square(tk.Button):
     def __init__(self, master, myRow, myCol):
@@ -28,9 +29,9 @@ class PatternFrame(tk.Frame):
         
     def addSquares(self):
         numSide = 5
-        for i in range(numSide):
-            for j in range(numSide):
-                self.square = Square(self, i, j)
+        for r in range(numSide):
+            for c in range(numSide):
+                self.square = Square(self, r, c)
      
         
 
@@ -47,6 +48,9 @@ class PatternBuilderTool:
         self.frameSpacer = tk.Frame(master, height = 400, width = 100)
         self.frameSpacer.grid(row = 2, column = 2)
         self.frameComplex = PatternFrame(master, 2, 3)
+        
+        sk = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
+        print(sk)
         
 root = tk.Tk()
 patternBuilder = PatternBuilderTool(root)
