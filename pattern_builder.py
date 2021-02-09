@@ -50,7 +50,7 @@ class PatternBuilderTool:
         self.frameComplex = PatternFrame(master, 2, 3)
         
         sk = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
-        print(sk)
+        print(sk["Name"][1])
         
 root = tk.Tk()
 patternBuilder = PatternBuilderTool(root)
