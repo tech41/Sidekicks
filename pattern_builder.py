@@ -33,24 +33,38 @@ class PatternFrame(tk.Frame):
             for c in range(numSide):
                 self.square = Square(self, r, c)
      
-        
+class CardListbox(tk.Listbox):
+    def __init__(self, master, myRow, myCol, cardData):
+        # not sure if listFrame is necessary or even if it is doing something
+        listFrame = tk.Frame(master)
+        listFrame.grid(row = myRow, column = myCol)
+        listFrame.config(height = 400, width = 300)
+        tk.Listbox.__init__(self, listFrame)
+        #self.config(height = 400, width = 300)
+        self.grid(row = 1, column = 1)
+        for card in cardData["Name"]:
+            self.insert(tk.END, card)            
+
 
 class PatternBuilderTool:
     def __init__(self, master):
         self.master = master
         master.title("Sidekicks: Pattern Builder")
         master.geometry('1000x500')
+        
+        cardData = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
+        #print(cardData["Name"])        
 
         self.label = tk.Label(master, text="Simple pattern")
         self.label.grid(row = 1, column = 1)
         
-        self.frameSimple = PatternFrame(master, 2, 1)
+        self.cardNames = CardListbox(master, 2, 1, cardData)
+        self.frameSimple = PatternFrame(master, 2, 2)
         self.frameSpacer = tk.Frame(master, height = 400, width = 100)
-        self.frameSpacer.grid(row = 2, column = 2)
-        self.frameComplex = PatternFrame(master, 2, 3)
+        self.frameSpacer.grid(row = 2, column = 3)
+        self.frameComplex = PatternFrame(master, 2, 4)
         
-        sk = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
-        print(sk["Name"][1])
+        
         
 root = tk.Tk()
 patternBuilder = PatternBuilderTool(root)
