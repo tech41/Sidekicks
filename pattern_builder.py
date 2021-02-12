@@ -43,7 +43,11 @@ class CardListbox(tk.Listbox):
         #self.config(height = 400, width = 300)
         self.grid(row = 1, column = 1)
         for card in cardData["Name"]:
-            self.insert(tk.END, card)            
+            self.insert(tk.END, card)
+            
+    def getCurrCard(self, event):
+        idx = self.curselection()
+        print(idx)        
 
 
 class PatternBuilderTool:
@@ -58,13 +62,15 @@ class PatternBuilderTool:
         self.label = tk.Label(master, text="Simple pattern")
         self.label.grid(row = 1, column = 1)
         
-        self.cardNames = CardListbox(master, 2, 1, cardData)
+        self.cardList = CardListbox(master, 2, 1, cardData)
+        self.cardList.bind('<<ListboxSelect>>', self.cardList.getCurrCard)
+
         self.frameSimple = PatternFrame(master, 2, 2)
         self.frameSpacer = tk.Frame(master, height = 400, width = 100)
         self.frameSpacer.grid(row = 2, column = 3)
         self.frameComplex = PatternFrame(master, 2, 4)
         
-        
+
         
 root = tk.Tk()
 patternBuilder = PatternBuilderTool(root)
