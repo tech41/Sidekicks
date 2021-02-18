@@ -72,4 +72,4 @@ RECTANGLE=labelrange([pattern_1_str_y],@µ),<frame*>,#000000,#FFD700,0.1%
 [pattern_2_str_y] = SCHEMA([pattern_2_y],1,,,PRODUCT(frame,((1))))
 RECTANGLE=labelrange([pattern_2_str_g],@µ),<frame*>,#000000,#228B22,0.1%
 RECTANGLE=labelrange([pattern_2_str_b],@µ),<frame*>,#000000,#002366,0.1%
-RECTANGLE=labelrange([pattern_2_str_b],@µ),<frame*>,#000000,#002366,0.1%
+RECTANGLE=labelrange([pattern_2_str_y],@µ),<frame*>,#000000,#FFD700,0.1%

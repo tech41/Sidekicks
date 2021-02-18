@@ -57,6 +57,7 @@ class PatternBuilderTool:
         for card in cardData["Name"]:
             self.cardList.insert(tk.END, card)
         self.cardList.bind('<<ListboxSelect>>', self.select_card)
+        self.cardData = cardData
 
         self.spacer1 = Spacer(master, 2, 2)
         self.frameSimple = PatternFrame(master, 2, 3)
@@ -67,6 +68,18 @@ class PatternBuilderTool:
         print("Calling method from top")
         cardIdx = self.cardList.curselection()
         print(cardIdx)
+        
+        # get index of current selection
+        
+        # read CSV pattern columns for index
+        
+        # convert nanDeck format to python
+        
+        # update strength text according to CSV (counting how many grids of that type)
+        
+        # update grid colors according to CSV
+        
+        
         
 root = tk.Tk()
 patternBuilder = PatternBuilderTool(root)
