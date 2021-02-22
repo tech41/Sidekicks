@@ -8,17 +8,25 @@ class Square(tk.Button):
         self.counter = 0
         self.colorList = ["white", "green", "blue", "yellow"]
         initColorIdx = 0
-        tk.Button.__init__(self, master, bg=self.colorList[initColorIdx], command=self.update_color) # could also use super().__init__()
+        tk.Button.__init__(self, master, bg=self.colorList[initColorIdx], command=self.click_change_color) # could also use super().__init__()
         self.config(height = 2, width = 5)
         self.grid(row = myRow, column = myCol)
 
-    def update_color(self):
+    def update_color(self, colorIdx):
+        self.config(bg = self.colorList[colorIdx])
+
+    def click_change_color(self):
         counter = self.counter
         counter += 1
         if counter > 3:
             counter = 0
-        self.config(bg = self.colorList[counter])
+        #self.config(bg = self.colorList[counter])
+        self.update_color(counter)
         self.counter = counter
+        
+    
+        
+    
 
 class PatternFrame(tk.Frame):
     def __init__(self, master, myRow, myCol):
@@ -26,13 +34,15 @@ class PatternFrame(tk.Frame):
         self.grid(row = myRow, column = myCol)
         self.config(height = 400, width = 400)
         self.config(bd = 1, relief = "raised")
-        self.addSquares()
+        self.add_squares()
         
-    def addSquares(self):
+    def add_squares(self):
         numSide = 5
         for r in range(numSide):
             for c in range(numSide):
                 self.square = Square(self, r, c)
+                
+    #def update_squares
 
 class Spacer(tk.Frame):
     def __init__(self, master, myRow, myCol):
@@ -61,9 +71,9 @@ class PatternBuilderTool:
         self.cardData = cardData
 
         self.spacer1 = Spacer(master, 2, 2)
-        self.frameSimple = PatternFrame(master, 2, 3)
+        self.patternLvl1 = PatternFrame(master, 2, 3)
         self.spacer2 = Spacer(master, 2, 4)
-        self.frameComplex = PatternFrame(master, 2, 5)
+        self.patternLvl2 = PatternFrame(master, 2, 5)
         
     def parse_pattern_col(self, patternStr):
         #print("---------- Pattern string is ", patternStr)
