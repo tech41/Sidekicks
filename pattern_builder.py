@@ -12,16 +12,16 @@ class Square(tk.Button):
         self.config(height = 2, width = 5)
         self.grid(row = myRow, column = myCol)
 
-    def update_color(self, colorIdx):
-        self.config(bg = self.colorList[colorIdx])
+    def update_color(self, color):
+        self.config(bg = color)
 
     def click_change_color(self):
         counter = self.counter
         counter += 1
         if counter > 3:
             counter = 0
-        #self.config(bg = self.colorList[counter])
-        self.update_color(counter)
+        thisColor = self.colorList[counter]
+        self.update_color(thisColor)
         self.counter = counter
         
     
@@ -100,7 +100,7 @@ class PatternBuilderTool:
         cardData = self.cardData
         
         patternLvlList = [1, 2]
-        colorList = ["g", "b", "y"]
+        colorList = ["green", "blue", "yellow"]
         for lvl in patternLvlList:
             for color in colorList:
                 colName = "Pattern_%s_%s" % (lvl, color)
