@@ -33,6 +33,13 @@ class PatternFrame(tk.Frame):
         self.config(bd = 1, relief = "raised")
         self.squareMat = self.add_squares(numSide)
         
+        
+        
+        
+        # debugging
+        s = self.squareMat[0][2]
+        s.update_color("green")
+        
     def add_squares(self, numSide):
         squareMat = []
         for r in range(numSide):
@@ -107,7 +114,7 @@ class PatternBuilderTool:
                 colName = "Pattern_%s_%s" % (lvl, color)
                 thisPattern =  cardData[colName][csvIdx]
                 rowsCols = self.parse_pattern_col(thisPattern)
-                print(rowsCols)
+                #print(rowsCols)
 
         
         
