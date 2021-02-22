@@ -23,24 +23,24 @@ class Square(tk.Button):
         thisColor = self.colorList[counter]
         self.update_color(thisColor)
         self.counter = counter
-        
-    
-        
-    
 
 class PatternFrame(tk.Frame):
     def __init__(self, master, myRow, myCol):
         tk.Frame.__init__(self, master)
+        numSide = 5
         self.grid(row = myRow, column = myCol)
         self.config(height = 400, width = 400)
         self.config(bd = 1, relief = "raised")
-        self.add_squares()
+        self.squareMat = self.add_squares(numSide)
         
-    def add_squares(self):
-        numSide = 5
+    def add_squares(self, numSide):
+        squareMat = []
         for r in range(numSide):
+            row = []
             for c in range(numSide):
-                self.square = Square(self, r, c)
+                row.append(Square(self, r, c))
+            squareMat.append(row)
+        return squareMat
                 
     #def update_squares
 
@@ -101,6 +101,7 @@ class PatternBuilderTool:
         
         patternLvlList = [1, 2]
         colorList = ["green", "blue", "yellow"]
+        #colorList = self.patternLvl1.square.colorList
         for lvl in patternLvlList:
             for color in colorList:
                 colName = "Pattern_%s_%s" % (lvl, color)
