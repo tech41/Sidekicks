@@ -6,7 +6,7 @@ import re             # regular expressions
 class Square(tk.Button):
     def __init__(self, master, myRow, myCol):
         self.counter = 0
-        self.colorList = ["white", "green", "blue", "yellow"]
+        self.colorList = master.colorList
         initColorIdx = 0
         tk.Button.__init__(self, master, bg=self.colorList[initColorIdx], command=self.click_change_color) # could also use super().__init__()
         self.config(height = 2, width = 5)
@@ -31,6 +31,7 @@ class PatternFrame(tk.Frame):
         self.grid(row = myRow, column = myCol)
         self.config(height = 400, width = 400)
         self.config(bd = 1, relief = "raised")
+        self.colorList = master.colorList
         self.squareMat = self.add_squares(numSide)
         
         
@@ -62,6 +63,7 @@ class PatternBuilderTool:
         self.master = master
         master.title("Sidekicks: Pattern Builder")
         master.geometry('1000x500+-1050+10')
+        master.colorList = ["white", "green", "blue", "yellow"] # first color = blank/none
         
         cardData = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
         #print(cardData["Name"])        
