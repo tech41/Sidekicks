@@ -111,34 +111,30 @@ class PatternBuilderTool:
         patternLvlList = [1, 2]
         colorList = ["green", "blue", "yellow"] # need to use list from root
         #colorList = self.patternLvl1.square.colorList
-        #thisSquareMat = self.patternLvl1.squareMat # works
-        #thisSquareMat = getattr(self, 'patternLvl1.squareMat') # doesn't work
-        #thisSquareMat = eval("self.patternLvl%s.squareMat" % (lvl)) # doesn't work
-        
-        thisPattern = getattr(self, 'patternLvl1')
-        thisSquareMat = thisPattern.squareMat
-        #print(thisPattern)
-        
-        
-        # debugging
-        s = thisSquareMat[0][2]
-        s.update_color("yellow")        
+
+        ## debugging - works
+        #s = thisSquareMat[0][2]
+        #s.update_color("yellow")        
         
         
         
         # Possibly use a dict instead:
         # See: https://stackoverflow.com/questions/26164568/how-can-i-dynamically-refer-to-a-variable-in-python/26164638
         
-        print(thisSquareMat)
+        #print(thisSquareMat)
         for lvl in patternLvlList:
-            #thisSquareMat = getattr(self, "patternLvl%s.squareMat" % (lvl))
-            
-            
+            thisPattern = getattr(self, 'patternLvl%s' % (lvl))
+            thisSquareMat = thisPattern.squareMat
+            # doesn't work yet
             for color in colorList:
                 colName = "Pattern_%s_%s" % (lvl, color)
                 thisPattern =  cardData[colName][csvIdx]
                 rowsCols = self.parse_pattern_col(thisPattern)
-                #print(rowsCols)
+                rows = rowsCols[0]
+                cols = rowsCols[1]
+                for r, c in zip(rows, cols):
+                    s = thisSquareMat[r][c]
+                    s.update_color(color)                   
 
         
         
