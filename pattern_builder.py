@@ -37,9 +37,9 @@ class PatternFrame(tk.Frame):
         
         
         
-        # debugging
-        s = self.squareMat[0][2]
-        s.update_color("green")
+        ## debugging
+        #s = self.squareMat[0][2]
+        #s.update_color("green")
         
     def add_squares(self, numSide):
         squareMat = []
@@ -109,9 +109,31 @@ class PatternBuilderTool:
         cardData = self.cardData
         
         patternLvlList = [1, 2]
-        colorList = ["green", "blue", "yellow"]
+        colorList = ["green", "blue", "yellow"] # need to use list from root
         #colorList = self.patternLvl1.square.colorList
+        #thisSquareMat = self.patternLvl1.squareMat # works
+        #thisSquareMat = getattr(self, 'patternLvl1.squareMat') # doesn't work
+        #thisSquareMat = eval("self.patternLvl%s.squareMat" % (lvl)) # doesn't work
+        
+        thisPattern = getattr(self, 'patternLvl1')
+        thisSquareMat = thisPattern.squareMat
+        #print(thisPattern)
+        
+        
+        # debugging
+        s = thisSquareMat[0][2]
+        s.update_color("yellow")        
+        
+        
+        
+        # Possibly use a dict instead:
+        # See: https://stackoverflow.com/questions/26164568/how-can-i-dynamically-refer-to-a-variable-in-python/26164638
+        
+        print(thisSquareMat)
         for lvl in patternLvlList:
+            #thisSquareMat = getattr(self, "patternLvl%s.squareMat" % (lvl))
+            
+            
             for color in colorList:
                 colName = "Pattern_%s_%s" % (lvl, color)
                 thisPattern =  cardData[colName][csvIdx]
