@@ -64,6 +64,7 @@ class PatternBuilderTool:
         master.title("Sidekicks: Pattern Builder")
         master.geometry('1000x500+-1050+10')
         master.colorList = ["white", "green", "blue", "yellow"] # first color = blank/none
+        self.colorList = master.colorList
         
         cardData = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
 
@@ -98,16 +99,18 @@ class PatternBuilderTool:
 
         return [rows, cols]
     
+    #def update_current_cardData(self):
+        
     def select_card(self, event):
         # get index of current selection
         cardIdx = self.cardList.curselection()
-        csvIdx = cardIdx[0]
+        csvIdx = cardIdx[0]+1
         print(cardIdx)
         print(csvIdx)
         cardData = self.cardData
         
         patternLvlList = [1, 2]
-        colorList = ["green", "blue", "yellow"] # need to use list from root
+        #colorList = ["green", "blue", "yellow"] # need to use list from root
 
         for lvl in patternLvlList:
             
@@ -116,9 +119,9 @@ class PatternBuilderTool:
 
             thisSquareMat = thisPattern.squareMat
            
-            for color in colorList:
+            for color in self.colorList[1:]:
                 colName = "Pattern_%s_%s" % (lvl, color)
-                thisPattern =  cardData[colName][csvIdx+1]
+                thisPattern =  cardData[colName][csvIdx]
                 rowsCols = self.parse_pattern_col(thisPattern)
                 rows = rowsCols[0]
                 cols = rowsCols[1]
