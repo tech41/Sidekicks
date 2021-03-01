@@ -65,6 +65,8 @@ class PatternBuilderTool:
         master.geometry('1000x500+-1050+10')
         master.colorList = ["white", "green", "blue", "yellow"] # first color = blank/none
         self.colorList = master.colorList
+        # future - make # pattern levels dynamic, or read this list from existing pattern objects
+        self.patternLvlList = [1, 2] 
         self.csvIdx = 1 # default initial value
         
         cardData = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
@@ -102,14 +104,50 @@ class PatternBuilderTool:
 
         return [rows, cols]
     
-    #def update_current_cardData(self):
-        #cardData
+    def update_current_cardData(self):
+        # write the current GUI pattern back to cardData
+        cardData = self.cardData
+        oldIdx = self.csvIdx
+        patternLvlList = self.patternLvlList
+        colorList = self.colorList
+        
+        for lvl in patternLvlList:
+            
+            thisPattern = getattr(self, 'patternLvl%s' % (lvl))
+            #thisPattern.blank_out_squares()
+
+            thisSquareMat = thisPattern.squareMat
+            #print(len(thisSquareMat[0]))
+            
+            for color in self.colorList[1:]:
+                colName = "Pattern_%s_%s" % (lvl, color)
+                hasThisColor = 0
+                rowColStr = ""
+                for r in range(len(thisSquareMat)):
+                    for c in range(len(thisSquareMat[r])):
+                        #print(r)
+                        s = thisSquareMat[r][c]
+                        oldColor = s.color
+                        if color == oldColor:
+                            hasThisColor = 1
+                            rCard = r+1
+                            cCard = c+1
+                            newStr = "{}.{}_".format(rCard, cCard)
+                            rowColStr += newStr
+                            #print(rowColStr)
+                if hasThisColor:
+                    cardData[colName][oldIdx] = rowColStr
+                else:
+                    cardData[colName][oldIdx] = "0"
+
+   
+        
         
     def update_current_card(self):
         cardData = self.cardData
         csvIdx = self.csvIdx
-        
-        patternLvlList = [1, 2]
+        patternLvlList = self.patternLvlList
+        #patternLvlList = [1, 2]
         #colorList = ["green", "blue", "yellow"] # need to use list from root
 
         for lvl in patternLvlList:
@@ -131,7 +169,7 @@ class PatternBuilderTool:
                     
     def select_card(self, event):
         # update cardData with current pattern before moving to the next card
-        #update_current_cardData()
+        self.update_current_cardData()
         
         # get index of current selection
         cardIdx = self.cardList.curselection()
