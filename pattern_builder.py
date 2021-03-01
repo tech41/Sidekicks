@@ -65,6 +65,7 @@ class PatternBuilderTool:
         master.geometry('1000x500+-1050+10')
         master.colorList = ["white", "green", "blue", "yellow"] # first color = blank/none
         self.colorList = master.colorList
+        self.csvIdx = 1 # default initial value
         
         cardData = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
 
@@ -83,6 +84,8 @@ class PatternBuilderTool:
         self.patternLvl1 = PatternFrame(master, 2, 3)
         self.spacer2 = Spacer(master, 2, 4)
         self.patternLvl2 = PatternFrame(master, 2, 5)
+        
+        self.update_current_card() # use initial value
     
     def parse_pattern_col(self, patternStr):
 
@@ -100,14 +103,11 @@ class PatternBuilderTool:
         return [rows, cols]
     
     #def update_current_cardData(self):
+        #cardData
         
-    def select_card(self, event):
-        # get index of current selection
-        cardIdx = self.cardList.curselection()
-        csvIdx = cardIdx[0]+1
-        print(cardIdx)
-        print(csvIdx)
+    def update_current_card(self):
         cardData = self.cardData
+        csvIdx = self.csvIdx
         
         patternLvlList = [1, 2]
         #colorList = ["green", "blue", "yellow"] # need to use list from root
@@ -128,6 +128,18 @@ class PatternBuilderTool:
                 for r, c in zip(rows, cols):
                     s = thisSquareMat[r][c]
                     s.update_color(color)
+                    
+    def select_card(self, event):
+        # update cardData with current pattern before moving to the next card
+        #update_current_cardData()
+        
+        # get index of current selection
+        cardIdx = self.cardList.curselection()
+        csvIdx = cardIdx[0]+1
+        self.csvIdx = csvIdx;
+        print(cardIdx)
+        print(csvIdx)
+        self.update_current_card()
         
 root = tk.Tk()
 patternBuilder = PatternBuilderTool(root)
