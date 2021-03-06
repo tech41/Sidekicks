@@ -69,7 +69,7 @@ class PatternBuilderTool:
         self.patternLvlList = [1, 2] 
         self.csvIdx = 1 # default initial value
         
-        cardData = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
+        cardData = pandas.read_csv('sidekicksDeck2.csv', index_col = 'ID')
 
         self.label = tk.Label(master, text="Simple pattern")
         self.label.grid(row = 1, column = 1)
@@ -82,12 +82,19 @@ class PatternBuilderTool:
         self.cardList.bind('<<ListboxSelect>>', self.select_card)
         self.cardData = cardData
 
+        self.exportButton = tk.Button(master, text="Export to CSV", command=self.export_to_csv)
+
         self.spacer1 = Spacer(master, 2, 2)
         self.patternLvl1 = PatternFrame(master, 2, 3)
         self.spacer2 = Spacer(master, 2, 4)
         self.patternLvl2 = PatternFrame(master, 2, 5)
+        self.exportButton.grid(row=2, column=6)
         
         self.update_current_card() # use initial value
+    
+    def export_to_csv(self):
+        cardData = self.cardData
+        cardData.to_csv(r'sidekicksDeck2.csv')
     
     def parse_pattern_col(self, patternStr):
 
@@ -114,10 +121,8 @@ class PatternBuilderTool:
         for lvl in patternLvlList:
             
             thisPattern = getattr(self, 'patternLvl%s' % (lvl))
-            #thisPattern.blank_out_squares()
 
             thisSquareMat = thisPattern.squareMat
-            #print(len(thisSquareMat[0]))
             
             for color in self.colorList[1:]:
                 colName = "Pattern_%s_%s" % (lvl, color)
@@ -125,7 +130,6 @@ class PatternBuilderTool:
                 rowColStr = ""
                 for r in range(len(thisSquareMat)):
                     for c in range(len(thisSquareMat[r])):
-                        #print(r)
                         s = thisSquareMat[r][c]
                         oldColor = s.color
                         if color == oldColor:
@@ -134,21 +138,27 @@ class PatternBuilderTool:
                             cCard = c+1
                             newStr = "{}.{}_".format(rCard, cCard)
                             rowColStr += newStr
-                            #print(rowColStr)
-                if hasThisColor:
-                    cardData[colName][oldIdx] = rowColStr
-                else:
-                    cardData[colName][oldIdx] = "0"
+                            
+                #col = cardData[colName]
+                #if hasThisColor:
+                    #col[oldIdx] = rowColStr
+                #else:
+                    #col[oldIdx] = "0"                
 
-   
-        
-        
+                if hasThisColor:
+                    cardData.at[oldIdx, colName] = rowColStr
+                else:
+                    cardData.at[oldIdx, colName] = "0"           
+                #if hasThisColor:
+                    #cardData.loc[oldIdx].at[colName] = rowColStr
+                #else:
+                    #cardData.loc[oldIdx].at[colName] = "0"
+        self.cardData = cardData
+                        
     def update_current_card(self):
         cardData = self.cardData
         csvIdx = self.csvIdx
         patternLvlList = self.patternLvlList
-        #patternLvlList = [1, 2]
-        #colorList = ["green", "blue", "yellow"] # need to use list from root
 
         for lvl in patternLvlList:
             
@@ -159,7 +169,7 @@ class PatternBuilderTool:
            
             for color in self.colorList[1:]:
                 colName = "Pattern_%s_%s" % (lvl, color)
-                thisPattern =  cardData[colName][csvIdx]
+                thisPattern = cardData[colName][csvIdx]
                 rowsCols = self.parse_pattern_col(thisPattern)
                 rows = rowsCols[0]
                 cols = rowsCols[1]
@@ -175,8 +185,6 @@ class PatternBuilderTool:
         cardIdx = self.cardList.curselection()
         csvIdx = cardIdx[0]+1
         self.csvIdx = csvIdx;
-        print(cardIdx)
-        print(csvIdx)
         self.update_current_card()
         
 root = tk.Tk()
