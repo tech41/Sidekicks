@@ -58,18 +58,18 @@ ENDVISUAL
 ; Simple spell pattern
 ;Future: Might be possible to auto-generate patterns. See 'Labels and sequences'
 [frame]=FRAMEBOX(.40,1.6,0.45,0.45,0.09,0.09,C.,85)
-[pattern_1_str_g] = SCHEMA([pattern_1_g],1,,,PRODUCT(frame,((1))))
-[pattern_1_str_b] = SCHEMA([pattern_1_b],1,,,PRODUCT(frame,((1))))
-[pattern_1_str_y] = SCHEMA([pattern_1_y],1,,,PRODUCT(frame,((1))))
+[pattern_1_str_g] = SCHEMA([Pattern_1_green],1,,,PRODUCT(frame,((1))))
+[pattern_1_str_b] = SCHEMA([Pattern_1_blue],1,,,PRODUCT(frame,((1))))
+[pattern_1_str_y] = SCHEMA([Pattern_1_yellow],1,,,PRODUCT(frame,((1))))
 RECTANGLE=labelrange([pattern_1_str_g],@µ),<frame*>,#000000,#228B22,0.1%
 RECTANGLE=labelrange([pattern_1_str_b],@µ),<frame*>,#000000,#002366,0.1%
 RECTANGLE=labelrange([pattern_1_str_y],@µ),<frame*>,#000000,#FFD700,0.1%
 
 ;Complex spell pattern
 [frame]=FRAMEBOX(0.40,2.51,0.45,0.45,0.09,0.09,C.,85)
-[pattern_2_str_g] = SCHEMA([pattern_2_g],1,,,PRODUCT(frame,((1))))
-[pattern_2_str_b] = SCHEMA([pattern_2_b],1,,,PRODUCT(frame,((1))))
-[pattern_2_str_y] = SCHEMA([pattern_2_y],1,,,PRODUCT(frame,((1))))
+[pattern_2_str_g] = SCHEMA([Pattern_2_green],1,,,PRODUCT(frame,((1))))
+[pattern_2_str_b] = SCHEMA([Pattern_2_blue],1,,,PRODUCT(frame,((1))))
+[pattern_2_str_y] = SCHEMA([Pattern_2_yellow],1,,,PRODUCT(frame,((1))))
 RECTANGLE=labelrange([pattern_2_str_g],@µ),<frame*>,#000000,#228B22,0.1%
 RECTANGLE=labelrange([pattern_2_str_b],@µ),<frame*>,#000000,#002366,0.1%
 RECTANGLE=labelrange([pattern_2_str_y],@µ),<frame*>,#000000,#FFD700,0.1%

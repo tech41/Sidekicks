@@ -69,7 +69,7 @@ class PatternBuilderTool:
         self.patternLvlList = [1, 2] 
         self.csvIdx = 1 # default initial value
         
-        cardData = pandas.read_csv('sidekicksDeck2.csv', index_col = 'ID')
+        cardData = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
 
         self.label = tk.Label(master, text="Simple pattern")
         self.label.grid(row = 1, column = 1)
@@ -93,8 +93,9 @@ class PatternBuilderTool:
         self.update_current_card() # use initial value
     
     def export_to_csv(self):
+        self.update_current_cardData()
         cardData = self.cardData
-        cardData.to_csv(r'sidekicksDeck2.csv')
+        cardData.to_csv('sidekicksDeck.csv')
     
     def parse_pattern_col(self, patternStr):
 
