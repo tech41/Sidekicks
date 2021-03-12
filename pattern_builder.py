@@ -101,8 +101,8 @@ class PatternBuilderTool:
 
         dots = [m.start() for m in re.finditer('\.', patternStr)]
         if len(dots) > 0:
-            rIdx = [dot - 1 for dot in dots]
-            cIdx = [dot + 1 for dot in dots]
+            rIdx = [dot + 1 for dot in dots]
+            cIdx = [dot - 1 for dot in dots]
             
             rows = [int(patternStr[r])-1 for r in rIdx]
             cols = [int(patternStr[c])-1 for c in cIdx]
@@ -131,7 +131,7 @@ class PatternBuilderTool:
                 rowColStr = ""
                 for r in range(len(thisSquareMat)):
                     for c in range(len(thisSquareMat[r])):
-                        s = thisSquareMat[r][c]
+                        s = thisSquareMat[c][r]
                         oldColor = s.color
                         if color == oldColor:
                             hasThisColor = 1
@@ -172,10 +172,10 @@ class PatternBuilderTool:
                 colName = "Pattern_%s_%s" % (lvl, color)
                 thisPattern = cardData[colName][csvIdx]
                 rowsCols = self.parse_pattern_col(thisPattern)
-                rows = rowsCols[0]
-                cols = rowsCols[1]
+                rows = rowsCols[1]
+                cols = rowsCols[0]
                 for r, c in zip(rows, cols):
-                    s = thisSquareMat[r][c]
+                    s = thisSquareMat[c][r]
                     s.update_color(color)
                     
     def select_card(self, event):

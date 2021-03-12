@@ -19,12 +19,11 @@ FONT=Book Antiqua,16,,#000000
 ;; Card name
 ;(NAME)
 ;returns number of elements in NAME -> First input is range = 1-n(locked)
-TEXT="1-{(NAME)}",[NAME],5%,2.5%,90%,8.5%,CENTER
-;IMAGE(locked)
-;Future: Possibly use DIRFILES to load an image where the file names matches card name
+TEXT="1-{(NAME)}",[NAME],5.011%,2.471%,89.978%,8.43%,CENTER
+;IMAGE
+;Future: Possibly use DIRFILES to load an image where the file names matches card name(locked)
 IMAGE="1-{(IMAGE)}",[IMAGE],27.015%,10.029%,46.841%,31.395%
 EDGE=,SOLID
-
 FONT=Book Antiqua,10,,#000000
 ;[s]Future: Use sequence  ="M+|A+|D+" plus frame to define scores
 ;M1 (locked)
@@ -57,19 +56,28 @@ ENDVISUAL
 
 ; Simple spell pattern
 ;Future: Might be possible to auto-generate patterns. See 'Labels and sequences'
-[frame]=FRAMEBOX(.40,1.6,0.45,0.45,0.09,0.09,C.,85)
-[pattern_1_str_g] = SCHEMA([Pattern_1_green],1,,,PRODUCT(frame,((1))))
-[pattern_1_str_b] = SCHEMA([Pattern_1_blue],1,,,PRODUCT(frame,((1))))
-[pattern_1_str_y] = SCHEMA([Pattern_1_yellow],1,,,PRODUCT(frame,((1))))
-RECTANGLE=labelrange([pattern_1_str_g],@µ),<frame*>,#000000,#228B22,0.1%
-RECTANGLE=labelrange([pattern_1_str_b],@µ),<frame*>,#000000,#002366,0.1%
-RECTANGLE=labelrange([pattern_1_str_y],@µ),<frame*>,#000000,#FFD700,0.1%
+[frame1]=FRAMEBOX(0.40,1.6,0.45,0.45,0.09,0.09,C.,85)
+[pattern_1_str_g] = SCHEMA([Pattern_1_green],1,,,PRODUCT(frame1,((1))))
+[pattern_1_str_b] = SCHEMA([Pattern_1_blue],1,,,PRODUCT(frame1,((1))))
+[pattern_1_str_y] = SCHEMA([Pattern_1_yellow],1,,,PRODUCT(frame1,((1))))
+RECTANGLE=labelrange([pattern_1_str_g],@µ),<frame1*>,#000000,#228B22,0.1%
+RECTANGLE=labelrange([pattern_1_str_b],@µ),<frame1*>,#000000,#002366,0.1%
+RECTANGLE=labelrange([pattern_1_str_y],@µ),<frame1*>,#000000,#FFD700,0.1%
+
+;[frame]=FRAMEBOX(0.40,1.6,3.45,0.45,0.09,0.09,C.,85)
+;[pattern_2_str_g] = SCHEMA([Pattern_2_green],1,,,PRODUCT(frame,((1))))
+;[pattern_2_str_b] = SCHEMA([Pattern_2_blue],1,,,PRODUCT(frame,((1))))
+;[pattern_2_str_y] = SCHEMA([Pattern_2_yellow],1,,,PRODUCT(frame,((1))))
+;RECTANGLE=labelrange([pattern_2_str_g],@µ),<frame*>,#000000,#228B22,0.1%
+;RECTANGLE=labelrange([pattern_2_str_b],@µ),<frame*>,#000000,#002366,0.1%
+;RECTANGLE=labelrange([pattern_2_str_y],@µ),<frame*>,#000000,#FFD700,0.1%
+
 
 ;Complex spell pattern
-[frame]=FRAMEBOX(0.40,2.51,0.45,0.45,0.09,0.09,C.,85)
-[pattern_2_str_g] = SCHEMA([Pattern_2_green],1,,,PRODUCT(frame,((1))))
-[pattern_2_str_b] = SCHEMA([Pattern_2_blue],1,,,PRODUCT(frame,((1))))
-[pattern_2_str_y] = SCHEMA([Pattern_2_yellow],1,,,PRODUCT(frame,((1))))
-RECTANGLE=labelrange([pattern_2_str_g],@µ),<frame*>,#000000,#228B22,0.1%
-RECTANGLE=labelrange([pattern_2_str_b],@µ),<frame*>,#000000,#002366,0.1%
-RECTANGLE=labelrange([pattern_2_str_y],@µ),<frame*>,#000000,#FFD700,0.1%
+[frame2]=FRAMEBOX(0.40,2.51,0.45,0.45,0.09,0.09,C.,85)
+[pattern_2_str_g] = SCHEMA([Pattern_2_green],1,,,PRODUCT(frame2,((1))))
+[pattern_2_str_b] = SCHEMA([Pattern_2_blue],1,,,PRODUCT(frame2,((1))))
+[pattern_2_str_y] = SCHEMA([Pattern_2_yellow],1,,,PRODUCT(frame2,((1))))
+RECTANGLE=labelrange([pattern_2_str_g],@µ),<frame2*>,#000000,#228B22,0.1%
+RECTANGLE=labelrange([pattern_2_str_b],@µ),<frame2*>,#000000,#002366,0.1%
+RECTANGLE=labelrange([pattern_2_str_y],@µ),<frame2*>,#000000,#FFD700,0.1%
