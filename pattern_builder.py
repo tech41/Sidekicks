@@ -33,7 +33,8 @@ class PatternBuilderTool:
         self.patternLvl1 = PatternFrame(master, 2, 3)
         self.spacer2 = Spacer(master, 2, 4)
         self.patternLvl2 = PatternFrame(master, 2, 5)
-        self.exportButton.grid(row=2, column=6)
+        self.spacer3 = Spacer(master, 2, 6)
+        self.exportButton.grid(row=2, column=7)
         
         self.update_current_card() # use initial value
     
@@ -175,7 +176,7 @@ class Spacer(tk.Frame):
     def __init__(self, master, myRow, myCol):
         tk.Frame.__init__(self, master)
         self.grid(row = myRow, column = myCol)
-        self.config(height = 400, width = 50)
+        self.config(height = 400, width = 30)
 
 
 root = tk.Tk()
