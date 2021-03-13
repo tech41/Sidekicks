@@ -1,5 +1,5 @@
 ID,Name,Type,Count,Image,M1,A1,D1,M2,A2,D2,Pattern_1_green,Pattern_1_blue,Pattern_1_yellow,Pattern_2_green,Pattern_2_blue,Pattern_2_yellow,Ability_1,Ability_2
-1,Dash,Move,2,images/wingfoot.png,1.0,1.0,1.0,3.0,2.0,2.0,1.1_1.2_1.3_1.4_1.5_2.1_2.4_2.5_3.1_3.4_3.5_4.1_4.2_4.3_4.5_5.1_5.2_5.3_5.4_5.5_,2.2_3.3_4.4_,2.3_3.2_,1.3_1.4_1.5_2.3_2.4_2.5_3.1_3.2_3.3_3.4_3.5_4.2_4.3_4.4_4.5_5.1_5.3_5.4_5.5_,2.1_2.2_,1.1_1.2_4.1_5.2_,,
+1,Dash,Move,2,images/wingfoot.png,1.0,1.0,1.0,3.0,2.0,2.0,1.1_1.2_1.3_1.4_1.5_2.4_2.5_3.1_3.4_3.5_4.2_4.3_4.5_5.1_5.2_5.3_5.4_5.5_,2.2_3.3_4.4_,2.3_3.2_,1.3_1.4_1.5_2.3_2.4_2.5_3.1_3.2_3.3_3.4_3.5_4.2_4.3_4.4_4.5_5.1_5.3_5.4_5.5_,2.1_2.2_,1.1_1.2_4.1_5.2_,,
 2,Teleport,Move,2,images/wingfoot.png,2.0,1.0,2.0,4.0,3.0,4.0,2.1_5.1_,1.1_,2.3_,3.1_3.2_,0,2.1_2.2_2.3_,"After rolling but without using this card, you may move this card to use against a different monster","Use this card, then move it to another monster to use again"
 3,Move3,Move,2,images/wingfoot.png,3.0,1.0,1.0,6.0,3.0,4.0,3.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2_3.2,2.1_2.2_3.2,,
 4,Move4,Move,2,images/wingfoot.png,1.0,2.0,1.0,6.0,4.0,3.0,4.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2,,

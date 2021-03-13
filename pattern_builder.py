@@ -3,61 +3,6 @@ import tkinter as tk
 import pandas         # read/write CSV
 import re             # regular expressions
 
-class Square(tk.Button):
-    def __init__(self, master, myRow, myCol):
-        self.counter = 0
-        self.colorList = master.colorList
-        initColorIdx = 0
-        tk.Button.__init__(self, master, bg=self.colorList[initColorIdx], command=self.click_change_color) # could also use super().__init__()
-        self.config(height = 2, width = 5)
-        self.grid(row = myRow, column = myCol)
-
-    def update_color(self, color):
-        self.color = color
-        self.config(bg = color)
-
-    def click_change_color(self):
-        counter = self.counter
-        counter += 1
-        if counter > 3:
-            counter = 0
-        thisColor = self.colorList[counter]
-        self.update_color(thisColor)
-        self.counter = counter
-
-class PatternFrame(tk.Frame):
-    def __init__(self, master, myRow, myCol):
-        tk.Frame.__init__(self, master)
-        self.numSide = 5
-        self.grid(row = myRow, column = myCol)
-        self.config(height = 400, width = 400)
-        self.config(bd = 1, relief = "raised")
-        self.colorList = master.colorList
-        self.squareMat = self.add_squares(self.numSide)
-        
-    def add_squares(self, numSide):
-        squareMat = []
-        for r in range(numSide):
-            row = []
-            for c in range(numSide):
-                row.append(Square(self, r, c))
-            squareMat.append(row)
-        return squareMat
-                
-    def blank_out_squares(self):
-        squareMat = self.squareMat
-        numSide = self.numSide
-        for r in range(numSide):
-            for c in range(numSide):
-                s = squareMat[r][c]        
-                s.update_color("white")
-
-class Spacer(tk.Frame):
-    def __init__(self, master, myRow, myCol):
-        tk.Frame.__init__(self, master)
-        self.grid(row = myRow, column = myCol)
-        self.config(height = 400, width = 50)
-     
 class PatternBuilderTool:
     def __init__(self, master):
         self.master = master
@@ -139,22 +84,11 @@ class PatternBuilderTool:
                             cCard = c+1
                             newStr = "{}.{}_".format(rCard, cCard)
                             rowColStr += newStr
-                            
-                #col = cardData[colName]
-                #if hasThisColor:
-                    #col[oldIdx] = rowColStr
-                #else:
-                    #col[oldIdx] = "0"                
 
                 if hasThisColor:
                     cardData.at[oldIdx, colName] = rowColStr
                 else:
                     cardData.at[oldIdx, colName] = "0"           
-                #if hasThisColor:
-                    #cardData.loc[oldIdx].at[colName] = rowColStr
-                #else:
-                    #cardData.loc[oldIdx].at[colName] = "0"
-        self.cardData = cardData
                         
     def update_current_card(self):
         cardData = self.cardData
@@ -187,7 +121,63 @@ class PatternBuilderTool:
         csvIdx = cardIdx[0]+1
         self.csvIdx = csvIdx;
         self.update_current_card()
+
+class Square(tk.Button):
+    def __init__(self, master, myRow, myCol):
+        self.counter = 0
+        self.colorList = master.colorList
+        initColorIdx = 0
+        tk.Button.__init__(self, master, bg=self.colorList[initColorIdx], command=self.click_change_color) # could also use super().__init__()
+        self.config(height = 2, width = 5)
+        self.grid(row = myRow, column = myCol)
+
+    def update_color(self, color):
+        self.color = color
+        self.config(bg = color)
+
+    def click_change_color(self):
+        counter = self.counter
+        counter += 1
+        if counter > 3:
+            counter = 0
+        thisColor = self.colorList[counter]
+        self.update_color(thisColor)
+        self.counter = counter
+
+class PatternFrame(tk.Frame):
+    def __init__(self, master, myRow, myCol):
+        tk.Frame.__init__(self, master)
+        self.numSide = 5
+        self.grid(row = myRow, column = myCol)
+        self.config(height = 400, width = 400)
+        self.config(bd = 1, relief = "raised")
+        self.colorList = master.colorList
+        self.squareMat = self.add_squares(self.numSide)
         
+    def add_squares(self, numSide):
+        squareMat = []
+        for r in range(numSide):
+            row = []
+            for c in range(numSide):
+                row.append(Square(self, r, c))
+            squareMat.append(row)
+        return squareMat
+                
+    def blank_out_squares(self):
+        squareMat = self.squareMat
+        numSide = self.numSide
+        for r in range(numSide):
+            for c in range(numSide):
+                s = squareMat[r][c]        
+                s.update_color("white")
+
+class Spacer(tk.Frame):
+    def __init__(self, master, myRow, myCol):
+        tk.Frame.__init__(self, master)
+        self.grid(row = myRow, column = myCol)
+        self.config(height = 400, width = 50)
+
+
 root = tk.Tk()
 patternBuilder = PatternBuilderTool(root)
 root.mainloop()
