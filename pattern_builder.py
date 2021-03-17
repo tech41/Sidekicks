@@ -13,8 +13,9 @@ class PatternBuilderTool:
         # future - make # pattern levels dynamic, or read this list from existing pattern objects
         self.patternLvlList = [1, 2] 
         self.csvIdx = 1 # default initial value
+        self.csvStr = 'sidekicksDeck.csv';
         
-        cardData = pandas.read_csv('sidekicksDeck.csv', index_col = 'ID')
+        cardData = pandas.read_csv(self.csvStr, index_col = 'ID')
 
         self.label = tk.Label(master, text="Simple pattern")
         self.label.grid(row = 1, column = 1)
@@ -36,27 +37,20 @@ class PatternBuilderTool:
         self.spacer3 = Spacer(master, 2, 6)
         self.exportButton.grid(row=2, column=7)
         
+        self.statsLvl1 = StatFrame(master, 1, 3, 1)
+        self.statsLvl2 = StatFrame(master, 1, 5, 2)
+        
         self.update_current_card() # use initial value
-    
-    def export_to_csv(self):
+
+    def select_card(self, event):
+        # update cardData with current pattern before moving to the next card
         self.update_current_cardData()
-        cardData = self.cardData
-        cardData.to_csv('sidekicksDeck.csv')
-    
-    def parse_pattern_col(self, patternStr):
-
-        dots = [m.start() for m in re.finditer('\.', patternStr)]
-        if len(dots) > 0:
-            rIdx = [dot + 1 for dot in dots]
-            cIdx = [dot - 1 for dot in dots]
-            
-            rows = [int(patternStr[r])-1 for r in rIdx]
-            cols = [int(patternStr[c])-1 for c in cIdx]
-        else:
-            rows = []
-            cols = []
-
-        return [rows, cols]
+        
+        # get index of current selection
+        cardIdx = self.cardList.curselection()
+        csvIdx = cardIdx[0]+1
+        self.csvIdx = csvIdx;
+        self.update_current_card()
     
     def update_current_cardData(self):
         # write the current GUI pattern back to cardData
@@ -112,16 +106,40 @@ class PatternBuilderTool:
                 for r, c in zip(rows, cols):
                     s = thisSquareMat[c][r]
                     s.update_color(color)
-                    
-    def select_card(self, event):
-        # update cardData with current pattern before moving to the next card
+
+    def parse_pattern_col(self, patternStr):
+
+        dots = [m.start() for m in re.finditer('\.', patternStr)]
+        if len(dots) > 0:
+            rIdx = [dot + 1 for dot in dots]
+            cIdx = [dot - 1 for dot in dots]
+            
+            rows = [int(patternStr[r])-1 for r in rIdx]
+            cols = [int(patternStr[c])-1 for c in cIdx]
+        else:
+            rows = []
+            cols = []
+
+        return [rows, cols]
+
+    def export_to_csv(self):
         self.update_current_cardData()
+        cardData = self.cardData
+        cardData.to_csv(self.csvStr)
+
+class StatFrame(tk.Frame):
+    def __init__(self, master, myRow, myCol, lvl):
+        tk.Frame.__init__(self, master)
+        self.grid(row = myRow, column = myCol)
+        self.config(height = 10, width = 400)
+        self.config(bd = 1, relief = "raised")
         
-        # get index of current selection
-        cardIdx = self.cardList.curselection()
-        csvIdx = cardIdx[0]+1
-        self.csvIdx = csvIdx;
-        self.update_current_card()
+        self.mLabel = tk.Label(self, text = "M = ")
+        self.aLabel = tk.Label(self, text = " A = ")
+        self.dLabel = tk.Label(self, text = " D = ")
+        self.mLabel.grid(row = 1, column = 1)
+        self.aLabel.grid(row = 1, column = 3)
+        self.dLabel.grid(row = 1, column = 5)
 
 class Square(tk.Button):
     def __init__(self, master, myRow, myCol):
