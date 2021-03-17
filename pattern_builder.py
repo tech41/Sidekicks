@@ -60,7 +60,8 @@ class PatternBuilderTool:
         colorList = self.colorList
         
         for lvl in patternLvlList:
-            
+
+            # Update cardData with pattern frame before switching
             thisPattern = getattr(self, 'patternLvl%s' % (lvl))
 
             thisSquareMat = thisPattern.squareMat
@@ -91,7 +92,15 @@ class PatternBuilderTool:
         patternLvlList = self.patternLvlList
 
         for lvl in patternLvlList:
+            # Update stats frame
+            thisStat = getattr(self, 'statsLvl%s' % (lvl))
+            m = cardData["M%s" % (lvl)][csvIdx]
+            a = cardData["A%s" % (lvl)][csvIdx]
+            d = cardData["D%s" % (lvl)][csvIdx]
             
+            thisStat.update_stats(m, a, d)
+            
+            # Update pattern frame
             thisPattern = getattr(self, 'patternLvl%s' % (lvl))
             thisPattern.blank_out_squares()
 
@@ -134,12 +143,28 @@ class StatFrame(tk.Frame):
         self.config(height = 10, width = 400)
         self.config(bd = 1, relief = "raised")
         
-        self.mLabel = tk.Label(self, text = "M = ")
-        self.aLabel = tk.Label(self, text = " A = ")
-        self.dLabel = tk.Label(self, text = " D = ")
+        self.mStat = tk.StringVar()
+        self.aStat = tk.StringVar()
+        self.dStat = tk.StringVar()
+        
+        self.mLabel = tk.Label(self, text = "M =", bg = "blue")
+        self.mStatLabel = tk.Label(self, textvariable = self.mStat)
+        self.aLabel = tk.Label(self, text = " A =", bg = "yellow")
+        self.aStatLabel = tk.Label(self, textvariable = self.aStat)
+        self.dLabel = tk.Label(self, text = " D =", bg = "green")
+        self.dStatLabel = tk.Label(self, textvariable = self.dStat)
+        
         self.mLabel.grid(row = 1, column = 1)
+        self.mStatLabel.grid(row = 1, column = 2)
         self.aLabel.grid(row = 1, column = 3)
+        self.aStatLabel.grid(row = 1, column = 4)
         self.dLabel.grid(row = 1, column = 5)
+        self.dStatLabel.grid(row = 1, column = 6)
+        
+    def update_stats(self, m, a, d):
+        self.mStat.set(m)
+        self.aStat.set(a)
+        self.dStat.set(d)
 
 class Square(tk.Button):
     def __init__(self, master, myRow, myCol):
