@@ -1,26 +1,26 @@
 ID,Name,Type,Count,Image,M1,A1,D1,M2,A2,D2,Ability_1,Ability_2,Pattern_1_green,Pattern_1_blue,Pattern_1_yellow,Pattern_2_green,Pattern_2_blue,Pattern_2_yellow
-1,Dash,Move,2,images/wingfoot.png,1,1,1,3,2,2,,,4.3_,2.3_,3.3_,4.3_5.3_,1.4_2.3_3.2_,1.3_3.3_
-2,Teleport,Move,2,images/wingfoot.png,2,1,2,4,3,4,"After rolling but without using this card, you may move a card to use against a different monster","Use a card, then move it to another monster to use again",2.1_5.1_,1.1_,2.3_,3.1_3.2_,0,2.1_2.2_2.3_
-3,10-Mile Boots,Move,2,images/wingfoot.png,3,1,1,6,3,4,"If you roll a 10 or higher, you can escape the monster","Before rolling, you can choose to escape the monster",3.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2_3.2,2.1_2.2_3.2
-4,Dive and Roll,Move,2,images/wingfoot.png,1,2,1,6,4,3,,,4.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-5,Spirit Horse,Move,2,images/wingfoot.png,1,2,1,4,2,2,,,5.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-6,Quick Feet,Move,2,images/wingfoot.png,3,2,2,5,2,2,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+1,Dash,Move,2,images/wingfoot.png,2,1,1,3,1,1,,,4.3_,2.3_,3.3_,4.3_5.3_,1.4_2.3_3.2_,1.3_3.3_
+2,Teleport,Move,2,images/wingfoot.png,2,2,1,4,3,2,"After rolling but without using this card, you may move a card to use against a different monster","Use a card, then move it to another monster to use again",3.5_,2.2_4.2_,2.3_4.3_,3.1_3.5_,2.2_2.4_4.2_4.4_,2.3_3.3_4.3_
+3,10-Mile Boots,Move,2,images/wingfoot.png,3,0,0,5,0,0,"If you roll a 10 or higher, you can escape the monster","Before rolling, you can choose to escape the monster",0,2.3_3.3_4.3_,0,0,1.3_2.3_3.3_4.3_5.3_,0
+4,Dive and Roll,Move,2,images/wingfoot.png,2,1,2,3,2,3,,,4.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+5,Spirit Horse,Move,2,images/wingfoot.png,3,2,2,5,3,3,,,5.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+6,Quick Feet,Move,2,images/wingfoot.png,2,1,1,3,2,2,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
 7,Move7,Move,2,images/wingfoot.png,2,2,1,6,3,2,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
 8,Move8,Move,2,images/wingfoot.png,3,1,2,4,4,2,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
 9,Move9,Move,2,images/wingfoot.png,3,2,1,6,2,2,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
 10,Move10,Move,2,images/wingfoot.png,1,2,1,3,4,3,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-11,Flame Sword,Attack,2,images/two-handed-sword.png,3,2,1,4,4,3,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-12,Fire Blast,Attack,2,images/two-handed-sword.png,3,1,2,4,4,4,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-13,Lightning Strike,Attack,2,images/two-handed-sword.png,3,2,1,6,3,2,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-14,Magic Arrow,Attack,2,images/two-handed-sword.png,1,1,1,3,2,3,"Use this attack, then use it again against one other monster","Use this attack, then use it again against every other monster",2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-15,Attack5,Attack,2,images/two-handed-sword.png,3,2,1,3,2,4,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-16,Attack6,Attack,2,images/two-handed-sword.png,1,1,1,3,4,4,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-17,Attack7,Attack,2,images/two-handed-sword.png,3,1,2,5,4,4,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-18,Attack8,Attack,2,images/two-handed-sword.png,2,2,2,6,2,4,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-20,Courage,Attack,2,images/two-handed-sword.png,1,2,1,4,3,3,"If the monster has an attack score greater than 6, A+3/D+3",,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-21,Resourceful,Attack,2,images/two-handed-sword.png,2,3,2,5,4,4,Immediately draw an extra card,Immediately search your deck for any card you choose,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
-22,Stone Wall,Defend,2,images/templar-shield.png,2,1,1,5,4,6,,,,,,,,
-23,Defend2,Defend,3,images/templar-shield.png,3,3,3,5,6,5,,,,,,,,
+11,Flame Sword,Attack,2,images/two-handed-sword.png,0,2,1,0,4,3,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+12,Fire Blast,Attack,2,images/two-handed-sword.png,0,3,0,0,4,2,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+13,Lightning Strike,Attack,2,images/two-handed-sword.png,0,3,1,0,5,2,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+14,Magic Arrow,Attack,2,images/two-handed-sword.png,0,2,1,0,4,1,"Use this attack, then use it again against one other monster","Use this attack, then use it again against every other monster",2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+15,Giant Strength,Attack,2,images/two-handed-sword.png,0,3,1,0,6,3,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+16,Attack6,Attack,2,images/two-handed-sword.png,0,1,1,0,4,4,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+17,Attack7,Attack,2,images/two-handed-sword.png,0,1,2,0,4,4,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+18,Attack8,Attack,2,images/two-handed-sword.png,0,2,2,0,2,4,,,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+20,Courage,Attack,2,images/two-handed-sword.png,1,2,1,2,5,3,"If the monster has an attack score greater than 6, A+3/D+3",,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+21,Resourcefulness,Attack,2,images/two-handed-sword.png,2,3,2,5,4,4,Immediately draw an extra card,Immediately search your deck for any card you choose,2.1_5.1_,2.2,2.3,3.1_3.2,2.1_2.2,2.1_2.2
+22,Stone Shield,Defend,2,images/templar-shield.png,2,1,1,5,4,6,,,,,,,,
+23,Deflect,Defend,3,images/templar-shield.png,3,3,3,5,6,5,Bounce the attack to a different monster somehow,,,,,,,
 24,Defend3,Defend,4,images/templar-shield.png,1,3,1,5,5,5,,,,,,,,
 25,Defend4,Defend,5,images/templar-shield.png,2,3,1,4,4,6,,,,,,,,
 26,Defend5,Defend,6,images/templar-shield.png,3,3,3,6,4,5,,,,,,,,
