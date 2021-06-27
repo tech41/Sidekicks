@@ -8,7 +8,7 @@ class PatternBuilderTool:
         self.master = master
         master.title("Sidekicks: Pattern Builder")
         master.geometry('1000x500+-1050+10')
-        master.colorList = ["white", "green", "blue", "yellow"] # first color = blank/none
+        master.colorList = ["green", "blue", "yellow"]
         self.colorList = master.colorList
         # future - make # pattern levels dynamic, or read this list from existing pattern objects
         self.patternLvlList = [1, 2] 
@@ -166,27 +166,37 @@ class StatFrame(tk.Frame):
         self.aStat.set(a)
         self.dStat.set(d)
 
-class Square(tk.Button):
+class Square(tk.Frame):
     def __init__(self, master, myRow, myCol):
-        self.counter = 0
+        self.counter = -1 # initialize as -1 (blank)
         self.colorList = master.colorList
-        initColorIdx = 0
-        tk.Button.__init__(self, master, bg=self.colorList[initColorIdx], command=self.click_change_color) # could also use super().__init__()
+        tk.Button.__init__(self, master, bg="white") # could also use super().__init__()
         self.config(height = 2, width = 5)
         self.grid(row = myRow, column = myCol)
+        self.bind('<Button-1>', self.click_change_color) # left click
+        self.bind('<Button-3>', self.click_blank_color) # right click
 
     def update_color(self, color):
         self.color = color
         self.config(bg = color)
-
-    def click_change_color(self):
+        
+    def blank_color(self):
+        self.update_color("white")
+        self.counter = -1
+    
+    # cycle through color list
+    def click_change_color(self, event):
         counter = self.counter
         counter += 1
-        if counter > 3:
+        if counter > 2:
             counter = 0
         thisColor = self.colorList[counter]
         self.update_color(thisColor)
         self.counter = counter
+    
+    # right click to set color to blank (white)
+    def click_blank_color(self, event):
+        self.blank_color()
 
 class PatternFrame(tk.Frame):
     def __init__(self, master, myRow, myCol):
@@ -213,7 +223,7 @@ class PatternFrame(tk.Frame):
         for r in range(numSide):
             for c in range(numSide):
                 s = squareMat[r][c]        
-                s.update_color("white")
+                s.blank_color
 
 class Spacer(tk.Frame):
     def __init__(self, master, myRow, myCol):
