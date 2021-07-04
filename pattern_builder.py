@@ -2,6 +2,7 @@
 import tkinter as tk
 import pandas         # read/write CSV
 import re             # regular expressions
+from functools import partial # For button commands with arguments
 
 class PatternBuilderTool:
     def __init__(self, master):
@@ -18,7 +19,7 @@ class PatternBuilderTool:
         cardData = pandas.read_csv(self.csvStr, index_col = 'ID')
 
         self.label = tk.Label(master, text="Simple pattern")
-        self.label.grid(row = 1, column = 1)
+
         
         # Listbox containing card names
         self.cardList = tk.Listbox(master)
@@ -29,16 +30,21 @@ class PatternBuilderTool:
         self.cardData = cardData
 
         self.exportButton = tk.Button(master, text="Export to CSV", command=self.export_to_csv)
+        self.leftArrow = tk.Button(master, text="<-", command=partial(self.copy_pattern,2,1))
+        self.rightArrow = tk.Button(master, text="->", command=partial(self.copy_pattern,1,2))
+
+        # Element positions
+        self.label.grid(row = 1, column = 1)
+        self.statsLvl1 = StatFrame(master, 1, 3, 1)
+        self.statsLvl2 = StatFrame(master, 1, 5, 2)
 
         self.spacer1 = Spacer(master, 2, 2)
         self.patternLvl1 = PatternFrame(master, 2, 3)
-        self.spacer2 = Spacer(master, 2, 4)
-        self.patternLvl2 = PatternFrame(master, 2, 5)
-        self.spacer3 = Spacer(master, 2, 6)
-        self.exportButton.grid(row=2, column=7)
-        
-        self.statsLvl1 = StatFrame(master, 1, 3, 1)
-        self.statsLvl2 = StatFrame(master, 1, 5, 2)
+        self.leftArrow.grid(row=2, column=4)
+        self.rightArrow.grid(row=2, column=5)
+        self.patternLvl2 = PatternFrame(master, 2, 6)
+        self.spacer3 = Spacer(master, 2, 7)
+        self.exportButton.grid(row=2, column=8)
         
         self.update_current_card() # use initial value
 
@@ -66,7 +72,7 @@ class PatternBuilderTool:
 
             thisSquareMat = thisPattern.squareMat
             
-            for color in self.colorList[1:]:
+            for color in self.colorList[0:]:
                 colName = "Pattern_%s_%s" % (lvl, color)
                 hasThisColor = 0
                 rowColStr = ""
@@ -130,6 +136,20 @@ class PatternBuilderTool:
             cols = []
 
         return [rows, cols]
+    
+    def copy_pattern(self, lvlFrom, lvlTo):
+        patternFrom =  getattr(self, 'patternLvl%s' % (lvlFrom))
+        patternTo   =  getattr(self, 'patternLvl%s' % (lvlTo))
+        patternTo.blank_out_squares()
+        
+        squareMatFrom = patternFrom.squareMat
+        squareMatTo   = patternTo.squareMat
+        for r in range(patternFrom.numSide): # numSide should be a property of the main class
+            for c in range(patternFrom.numSide):        
+                squareFrom = squareMatFrom[r][c]
+                squareTo   = squareMatTo[r][c]
+                color = squareFrom.color
+                squareTo.update_color(color)
 
     def export_to_csv(self):
         self.update_current_cardData()
@@ -168,9 +188,10 @@ class StatFrame(tk.Frame):
 
 class Square(tk.Frame):
     def __init__(self, master, myRow, myCol):
+        tk.Button.__init__(self, master) # could also use super().__init__()
         self.counter = -1 # initialize as -1 (blank)
-        self.colorList = master.colorList
-        tk.Button.__init__(self, master, bg="white") # could also use super().__init__()
+        self.blank_color() # initialize as white
+        self.colorList = master.colorList      
         self.config(height = 2, width = 5)
         self.grid(row = myRow, column = myCol)
         self.bind('<Button-1>', self.click_change_color) # left click
@@ -223,7 +244,7 @@ class PatternFrame(tk.Frame):
         for r in range(numSide):
             for c in range(numSide):
                 s = squareMat[r][c]        
-                s.blank_color
+                s.blank_color()
 
 class Spacer(tk.Frame):
     def __init__(self, master, myRow, myCol):
